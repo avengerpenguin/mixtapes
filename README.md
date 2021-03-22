@@ -42,22 +42,22 @@ and the following will happen (if your input is e.g. `foo.txt`):
   YouTube video ID you gave. This is hard-coded to download a particular format
   to keep it efficient and only get the audio, so it's not 100% guaranteed to
   work on every video (adjust it maybe if that's a problem).
-  
+
 * Then each `.webm` file will be converted to mp3.
 
 * The makefile will then generate a `foo.list` file (if your input file was
   `foo.txt` that contains ) with each mp3 in the order you have. This is in
   the format `ffmpeg` expects as input for `-f concat`
-  
+
 * Then `ffmpeg -f concat` is run on that `foo.list` file such that you get a
   single `foo.mp3` file. This file is usable as a single mixtape file if you
   wish.
-  
+
 * Your chosen image URL at the top of `foo.txt` will be downloaded as `foo.jpg`.
 
 * Finally, `ffmpeg` is run again to generate a `foo.mp4` video that has your
   playlist with your given still image.
-  
+
 The `makefile` is generic enough that you can populate the repo with as many
 `$foo.txt` files as you like and it will generate as many output mp4 files
 as you like. Run with `make -j` to run lots of things in parallel if you have a
