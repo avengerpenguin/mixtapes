@@ -2,6 +2,9 @@
 
 default: $(subst .txt,.mp4,$(shell ls *.txt))
 
+clean:
+	rm -rf *.jpg *.mp3 *.mp4 *.list
+
 %.mp4: %.mp3 %.jpg
 	ffmpeg -y -loop 1 -i $*.jpg -i $< -c:v libx264 -tune stillimage -c:a aac -b:a 192k -pix_fmt yuv420p -shortest $@
 
@@ -20,3 +23,6 @@ default: $(subst .txt,.mp4,$(shell ls *.txt))
 
 %.mp3: %.webm
 	ffmpeg -y -i $< -q:a 0 -map a $@
+
+
+.PHONY: default clean
